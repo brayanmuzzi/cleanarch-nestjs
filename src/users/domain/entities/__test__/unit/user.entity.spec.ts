@@ -1,23 +1,19 @@
-import { faker } from '@faker-js/faker'
 import { UserEntity, UserProps } from '../../user.entity'
+import { UserDataBuilder } from '@/users/domain/testing/helpers/user-data-builder'
 
 describe('UserEntity unit tests', () => {
   let props: UserProps
   let sut: UserEntity
 
   beforeEach(() => {
-    props = {
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-    }
+    props = UserDataBuilder({})
     sut = new UserEntity(props)
   })
   it('Constructor method', () => {
     expect(sut.props.name).toEqual(props.name)
     expect(sut.props.email).toEqual(props.email)
     expect(sut.props.password).toEqual(props.password)
-    expect(sut.props.createAt).toBeInstanceOf(Date)
+    expect(sut.props.createdAt).toBeInstanceOf(Date)
   })
 
   it('Method getter name field test', () => {
@@ -39,7 +35,7 @@ describe('UserEntity unit tests', () => {
   })
 
   it('Method getter createdAt', () => {
-    expect(sut.props.createAt).toBeDefined()
-    expect(sut.props.createAt).toBeInstanceOf(Date)
+    expect(sut.props.createdAt).toBeDefined()
+    expect(sut.props.createdAt).toBeInstanceOf(Date)
   })
 })
