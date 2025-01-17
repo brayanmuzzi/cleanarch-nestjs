@@ -36,7 +36,7 @@ export class UserRules {
 }
 
 export class UserValidator extends ClassValidatorFields<UserRules> {
-  validate(data: UserProps): boolean {
+  validate(data: UserRules): boolean {
     return super.validate(new UserRules(data ?? ({} as UserProps)))
   }
 }

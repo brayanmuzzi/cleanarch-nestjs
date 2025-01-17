@@ -87,17 +87,20 @@ describe('UserValidator unit tests', () => {
         'password must be a string',
         'password must be shorter than or equal to 100 characters',
       ])
+
       isValid = sut.validate({ ...props, password: '' })
       expect(isValid).toBeFalsy()
       expect(sut.errors['password']).toStrictEqual([
         'password should not be empty',
       ])
+
       isValid = sut.validate({ ...props, password: 10 as any })
       expect(isValid).toBeFalsy()
       expect(sut.errors['password']).toStrictEqual([
         'password must be a string',
         'password must be shorter than or equal to 100 characters',
       ])
+
       isValid = sut.validate({ ...props, password: 'a'.repeat(256) })
       expect(isValid).toBeFalsy()
       expect(sut.errors['password']).toStrictEqual([
@@ -112,10 +115,16 @@ describe('UserValidator unit tests', () => {
     expect(sut.errors['createdAt']).toStrictEqual([
       'createdAt must be a Date instance',
     ])
-    isValid = sut.validate({ ...props, createdAt: '2023' as any })
+
+    isValid = sut.validate({ ...props, createdAt: '2024' as any })
     expect(isValid).toBeFalsy()
     expect(sut.errors['createdAt']).toStrictEqual([
       'createdAt must be a Date instance',
     ])
+  })
+
+  it('Valid case for user rules', () => {
+    const isValid = sut.validate(props)
+    expect(isValid).toBeTruthy()
   })
 })
