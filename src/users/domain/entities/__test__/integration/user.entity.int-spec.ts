@@ -9,25 +9,25 @@ describe('UserEntity integration tests', () => {
         ...UserDataBuilder({}),
         name: null,
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
 
       props = {
         ...UserDataBuilder({}),
         name: '',
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
 
       props = {
         ...UserDataBuilder({}),
         name: 10 as any,
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
 
       props = {
         ...UserDataBuilder({}),
         name: 'a'.repeat(256),
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
     })
 
     it('Should throw an error when creating a user with invalid email', () => {
@@ -35,25 +35,25 @@ describe('UserEntity integration tests', () => {
         ...UserDataBuilder({}),
         email: null,
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
 
       props = {
         ...UserDataBuilder({}),
         email: '',
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
 
       props = {
         ...UserDataBuilder({}),
         email: 10 as any,
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
 
       props = {
         ...UserDataBuilder({}),
         email: 'a'.repeat(256),
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
     })
 
     it('Should throw an error when creating a user with invalid password', () => {
@@ -61,25 +61,25 @@ describe('UserEntity integration tests', () => {
         ...UserDataBuilder({}),
         password: null,
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
 
       props = {
         ...UserDataBuilder({}),
         password: '',
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
 
       props = {
         ...UserDataBuilder({}),
         password: 10 as any,
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
 
       props = {
         ...UserDataBuilder({}),
         password: 'a'.repeat(101),
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
     })
 
     it('Should throw an error when creating a user with invalid createdAt', () => {
@@ -87,13 +87,13 @@ describe('UserEntity integration tests', () => {
         ...UserDataBuilder({}),
         createdAt: '2023' as any,
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
 
       props = {
         ...UserDataBuilder({}),
         createdAt: 10 as any,
       }
-      expect(() => new UserEntity(props)).toThrowError(EntityValidationError)
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
     })
 
     it('Should a valid user', () => {
@@ -109,10 +109,10 @@ describe('UserEntity integration tests', () => {
   describe('Update method', () => {
     it('Should throw an error when update a user with invalid name', () => {
       const entity = new UserEntity(UserDataBuilder({}))
-      expect(() => entity.update(null)).toThrowError(EntityValidationError)
-      expect(() => entity.update('')).toThrowError(EntityValidationError)
-      expect(() => entity.update(10 as any)).toThrowError(EntityValidationError)
-      expect(() => entity.update('a'.repeat(256))).toThrowError(
+      expect(() => entity.update(null)).toThrow(EntityValidationError)
+      expect(() => entity.update('')).toThrow(EntityValidationError)
+      expect(() => entity.update(10 as any)).toThrow(EntityValidationError)
+      expect(() => entity.update('a'.repeat(256))).toThrow(
         EntityValidationError,
       )
     })
@@ -132,16 +132,12 @@ describe('UserEntity integration tests', () => {
   describe('UpdatePassword method', () => {
     it('Should a invalid user using password field', () => {
       const entity = new UserEntity(UserDataBuilder({}))
-      expect(() => entity.updatePassword(null)).toThrowError(
+      expect(() => entity.updatePassword(null)).toThrow(EntityValidationError)
+      expect(() => entity.updatePassword('')).toThrow(EntityValidationError)
+      expect(() => entity.updatePassword(10 as any)).toThrow(
         EntityValidationError,
       )
-      expect(() => entity.updatePassword('')).toThrowError(
-        EntityValidationError,
-      )
-      expect(() => entity.updatePassword(10 as any)).toThrowError(
-        EntityValidationError,
-      )
-      expect(() => entity.updatePassword('a'.repeat(101))).toThrowError(
+      expect(() => entity.updatePassword('a'.repeat(101))).toThrow(
         EntityValidationError,
       )
     })
