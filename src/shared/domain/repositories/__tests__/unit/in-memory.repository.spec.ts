@@ -6,13 +6,16 @@ type StubEntityProps = {
   name: string
   price: number
 }
+
 class StubEntity extends Entity<StubEntityProps> {}
 class StubInMemoryRepository extends InMemoryRepository<StubEntity> {}
 describe('InMemoryRepository unit tests', () => {
   let sut: StubInMemoryRepository
+
   beforeEach(() => {
     sut = new StubInMemoryRepository()
   })
+
   it('Should inserts a new entity', async () => {
     const entity = new StubEntity({ name: 'test name', price: 50 })
     await sut.insert(entity)
@@ -37,5 +40,12 @@ describe('InMemoryRepository unit tests', () => {
     await sut.insert(entity)
     const result = await sut.findAll()
     expect([entity]).toStrictEqual(result)
+  })
+
+  it('Should throw error on update when entity not found', async () => {
+    const entity = new StubEntity({ name: 'test name', price: 50 })
+    await expect(sut.update(entity)).rejects.toThrow(
+      new NotFoundError('Entity not found'),
+    )
   })
 })
