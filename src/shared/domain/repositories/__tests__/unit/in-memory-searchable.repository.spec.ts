@@ -9,6 +9,7 @@ type StubEntityProps = {
   name: string
   price: number
 }
+
 class StubEntity extends Entity<StubEntityProps> {}
 class StubInMemorySearchableRepository extends InMemorySearchableRepository<StubEntity> {
   sortableFields: string[] = ['name']
@@ -67,8 +68,10 @@ describe('InMemoryRepository unit tests', () => {
           new StubEntity({ name: 'b', price: 50 }),
           new StubEntity({ name: 'a', price: 50 }),
         ]
+
         let itemsSorted = await sut['applySort'](items, null, null)
         expect(itemsSorted).toStrictEqual(items)
+
         itemsSorted = await sut['applySort'](items, 'price', 'asc')
         expect(itemsSorted).toStrictEqual(items)
       })
@@ -80,8 +83,32 @@ describe('InMemoryRepository unit tests', () => {
         ]
         let itemsSorted = await sut['applySort'](items, 'name', 'asc')
         expect(itemsSorted).toStrictEqual([items[1], items[0], items[2]])
+
         itemsSorted = await sut['applySort'](items, 'name', 'desc')
         expect(itemsSorted).toStrictEqual([items[2], items[0], items[1]])
+      })
+    })
+
+    describe('applyPaginate method', () => {
+      it('should paginate items', async () => {
+        const items = [
+          new StubEntity({ name: 'a', price: 50 }),
+          new StubEntity({ name: 'b', price: 50 }),
+          new StubEntity({ name: 'c', price: 50 }),
+          new StubEntity({ name: 'd', price: 50 }),
+          new StubEntity({ name: 'e', price: 50 }),
+        ]
+        let itemsPaginated = await sut['applyPaginate'](items, 1, 2)
+        expect(itemsPaginated).toStrictEqual([items[0], items[1]])
+
+        itemsPaginated = await sut['applyPaginate'](items, 2, 2)
+        expect(itemsPaginated).toStrictEqual([items[2], items[3]])
+
+        itemsPaginated = await sut['applyPaginate'](items, 3, 2)
+        expect(itemsPaginated).toStrictEqual([items[4]])
+
+        itemsPaginated = await sut['applyPaginate'](items, 4, 2)
+        expect(itemsPaginated).toStrictEqual([])
       })
     })
   })
