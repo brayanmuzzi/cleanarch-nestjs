@@ -63,6 +63,7 @@ export class UserEntity extends Entity<UserProps> {
     const validator = UserValidatorFactory.create()
     const isValid = validator.validate(props)
     if (!isValid) {
+      console.error('Validation Errors:', validator.errors)
       throw new EntityValidationError(validator.errors)
     }
   }
