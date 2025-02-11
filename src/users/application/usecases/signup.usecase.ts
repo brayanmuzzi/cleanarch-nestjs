@@ -1,3 +1,7 @@
+import { UserRepository } from '@/users/domain/repositories/user.repository'
+import { UserEntity } from '@/users/domain/entities/user.entity'
+import { BadRequestError } from '@/shared/domain/errors/bad-request-error'
+
 export namespace SignupUseCase {
   export type Input = {
     name: string
@@ -14,6 +18,19 @@ export namespace SignupUseCase {
   }
 
   export class UseCase {
-    async execute(input: Input): Promise<Output> {}
+    constructor(private userRepository: UserRepository.Repository) {}
+
+    async execute(input: Input): Promise<Output> {
+      const { email, name, password } = input
+
+      if (!email || !name || !password) {
+        throw new BadRequestError('Input data not provided')
+      }
+
+      await this.userRepository.emailExists(email)
+
+      const entity = new UserEntity(input)
+      return entity.toJSON()
+    }
   }
 }
