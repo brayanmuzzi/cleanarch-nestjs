@@ -1,5 +1,6 @@
 import { UserRepository } from '@/users/domain/repositories/user.repository'
 import { UserOutput } from '../dtos/user-output'
+import { UseCase as DefaultUseCase } from './use-case'
 
 export namespace GetUserUseCase {
   export type Input = {
