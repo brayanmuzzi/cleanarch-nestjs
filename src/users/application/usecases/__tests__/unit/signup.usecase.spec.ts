@@ -6,7 +6,7 @@ import { ConflictError } from '@/shared/domain/errors/conflict-error'
 import { BadRequestError } from '@/shared/domain/errors/bad-request-error'
 import { BcryptHashProvider } from './../../../../infrastructure/providers/hash-provider/bcrypt-hash-provider'
 
-describe('UserInMemoryRepository unit tests', () => {
+describe('SignupUseCase unit tests', () => {
   let sut: SignupUseCase.UseCase
   let repository: UserInMemoryRepository
   let hashProvider: HashProvider
