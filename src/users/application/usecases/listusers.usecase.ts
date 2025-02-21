@@ -10,7 +10,7 @@ import {
 export namespace ListUsersUseCase {
   export type Input = SearchInput
 
-  export type Output = void
+  export type Output = PaginationOutput<UserOutput>
 
   export class UseCase implements DefaultUseCase<Input, Output> {
     constructor(private userRepository: UserRepository.Repository) {}
