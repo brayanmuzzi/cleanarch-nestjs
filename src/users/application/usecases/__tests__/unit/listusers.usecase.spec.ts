@@ -23,6 +23,7 @@ describe('ListUsersUseCase unit tests', () => {
       sortDir: null,
       filter: null,
     })
+
     let output = sut['toOutput'](result)
     expect(output).toStrictEqual({
       items: [],
@@ -42,6 +43,7 @@ describe('ListUsersUseCase unit tests', () => {
       sortDir: null,
       filter: null,
     })
+
     output = sut['toOutput'](result)
     expect(output).toStrictEqual({
       items: [entity.toJSON()],
@@ -96,6 +98,7 @@ describe('ListUsersUseCase unit tests', () => {
       sortDir: 'asc',
       filter: 'a',
     })
+
     expect(output).toStrictEqual({
       items: [items[0].toJSON()],
       total: 3,
