@@ -1,6 +1,7 @@
 import { BadRequestError } from '@/shared/domain/errors/bad-request-error'
 import { UserOutput, UserOutputMapper } from '../dtos/user-output'
 import { UseCase as DefaultUseCase } from './use-case'
+import { UserRepository } from '@/users/domain/repositories/user.repository'
 
 export namespace UpdateUserUseCase {
   export type Input = {
