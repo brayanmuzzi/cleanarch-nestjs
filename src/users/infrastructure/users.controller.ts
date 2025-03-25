@@ -11,7 +11,6 @@ import {
   Query,
   Put,
 } from '@nestjs/common'
-import { UsersService } from './users.service'
 import { SignupDto } from './dtos/signup.dto'
 import { UpdateUserDto } from './dtos/update-user.dto'
 import { SignupUseCase } from '../application/usecases/signup.usecase'
