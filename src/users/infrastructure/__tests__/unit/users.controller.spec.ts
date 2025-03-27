@@ -10,6 +10,7 @@ import { UpdateUserDto } from '../../dtos/update-user.dto'
 import { UpdatePasswordUseCase } from '@/users/application/usecases/update-password.usecase'
 import { UpdatePasswordDto } from '../../dtos/update-password.dto'
 import { GetUserUseCase } from '@/users/application/usecases/getuser.usecase'
+import { ListUsersUseCase } from '@/users/application/usecases/listusers.usecase'
 
 describe('UsersController unit tests', () => {
   let sut: UsersController
