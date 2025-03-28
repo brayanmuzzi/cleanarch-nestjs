@@ -121,4 +121,25 @@ describe('UsersController unit tests', () => {
       id,
     })
   })
+
+  it('should list users', async () => {
+    const output: ListUsersUseCase.Output = {
+      items: [props],
+      currentPage: 1,
+      lastPage: 1,
+      perPage: 1,
+      total: 1,
+    }
+    const mockListUsersUseCase = {
+      execute: jest.fn().mockReturnValue(Promise.resolve(output)),
+    }
+    sut['listUsersUseCase'] = mockListUsersUseCase as any
+    const searchParams = {
+      page: 1,
+      perPage: 1,
+    }
+    const result = await sut.search(searchParams)
+    expect(output).toStrictEqual(result)
+    expect(mockListUsersUseCase.execute).toHaveBeenCalledWith(searchParams)
+  })
 })
