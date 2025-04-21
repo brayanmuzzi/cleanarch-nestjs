@@ -35,7 +35,7 @@ export class UserPrismaRepository implements UserRepository.Repository {
       }),
     })
 
-    const models = this.prismaService.user.findMany({
+    const models = await this.prismaService.user.findMany({
       ...(props.filter && {
         where: {
           name: {
@@ -53,7 +53,7 @@ export class UserPrismaRepository implements UserRepository.Repository {
     })
 
     return new UserRepository.SearchResult({
-      items: (await models).map((model) => UserModelMapper.toEntity(model)),
+      items: models.map((model) => UserModelMapper.toEntity(model)),
       total: count,
       currentPage: props.page,
       perPage: props.perPage,
