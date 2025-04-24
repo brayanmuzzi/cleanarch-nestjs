@@ -66,7 +66,7 @@ describe('UserPrismaRepository integration tests', () => {
   it('should throws error on update when a entity not found', async () => {
     const entity = new UserEntity(UserDataBuilder({}))
     expect(() => sut.update(entity)).rejects.toThrow(
-      new NotFoundError(`UserModel not found usind ID ${entity._id}`),
+      new NotFoundError(`UserModel not found using ID ${entity._id}`),
     )
   })
 
