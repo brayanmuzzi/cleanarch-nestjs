@@ -127,7 +127,7 @@ describe('UserPrismaRepository integration tests', () => {
 
   it('should throws error when a entity not found', async () => {
     await expect(() => sut.findByEmail('a@a.com')).rejects.toThrow(
-      new NotFoundError(`UserModel not found usind email a@a.com`),
+      new NotFoundError(`UserModel not found using email a@a.com`),
     )
   })
 
