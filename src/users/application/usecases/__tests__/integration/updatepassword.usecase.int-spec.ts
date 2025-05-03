@@ -23,7 +23,7 @@ describe('UpdatePasswordUseCase integration tests', () => {
       imports: [DatabaseModule.forTest(prismaService)],
     }).compile()
     repository = new UserPrismaRepository(prismaService as any)
-    hashProvider = new BcryptjsHashProvider()
+    hashProvider = new BcryptHashProvider()
   })
 
   beforeEach(async () => {
